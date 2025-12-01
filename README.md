@@ -34,11 +34,28 @@ The tools will use the `gh` CLI by default if it's installed and authenticated.
 python -m github_tools.create_repo --org actual-software --name my-test-repo
 ```
 
-### Push this repository to GitHub
+### Use this repository as a template
+
+Push this repository as a new GitHub repository with custom configuration:
 
 ```bash
-./scripts/push_to_github.sh
+# Basic usage - create public repo
+./scripts/push_to_github.sh --org actual-software --repo my-test-repo
+
+# Create private repository
+./scripts/push_to_github.sh --org my-org --repo my-repo --visibility private
+
+# With custom description
+./scripts/push_to_github.sh -o test-org -r test-repo -d "My test repository"
+
+# Keep temp directory for debugging
+./scripts/push_to_github.sh -o my-org -r my-repo --keep-tmp
+
+# Show help
+./scripts/push_to_github.sh --help
 ```
+
+The script creates a temporary copy of the repository (excluding `.git`), initializes a fresh git repo, and pushes it to GitHub with your specified parameters. Your local working copy remains unchanged.
 
 ## Development
 
